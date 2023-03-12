@@ -12,6 +12,8 @@ letter_changes = {
     "0": "o"
 }
 
+letter_changed_list = ["@", "!", "$", "0"]
+
 
 def _removeAccents(string: Union[str, list[str]]) -> str: 
     """Remove accents from string to prevent bypasses.
@@ -55,6 +57,7 @@ def removeSymbols(words: list[str]) -> list[str]:
     
     return new_words_arr
 
+
 def lowerCase(words: list[str]) -> list[str]: 
     """Make all words in words list lowercase.
 
@@ -71,6 +74,7 @@ def lowerCase(words: list[str]) -> list[str]:
 
     return new_word_list
 
+
 def letterSwitchChecker(text: str, words: list[str]) -> list[str]:
     """Check for words were symbols have been put there instead of letters.
 
@@ -81,6 +85,23 @@ def letterSwitchChecker(text: str, words: list[str]) -> list[str]:
     Returns:
         list[str]: returns a list of words that triggered the checker.
     """
+    new_word_list: list[str] = []
+    changed_text: str = ""
+
+    words: list[str] = lowerCase(words)
+    words: list[str] = _removeAccents(words)
+
+    for letter in text:
+        if letter in letter_changed_list:
+            changed_to_char: str = letter_changes[letter]
+            changed_text += changed_to_char
+        else:
+            changed_text += letter
+
+    return new_word_list
+
+    
+
 
 
 def checker(text: str, remove_zero_width_spaces: Union[bool, None], remove_symbols: Union[bool, None], words: list[str]) -> list[str]:
@@ -94,6 +115,7 @@ def checker(text: str, remove_zero_width_spaces: Union[bool, None], remove_symbo
     Returns: 
         list (str): list of words that triggered the checker.
     """
+    original_text = text
     matching_words: list[str] = []
 
     word_list: list[str] = _removeAccents(words)
@@ -117,7 +139,7 @@ def checker(text: str, remove_zero_width_spaces: Union[bool, None], remove_symbo
         if word in text:
             matching_words.append(word)
 
-    
+    result = letterSwitchChecker(original_text, remove_symbols, words)
 
     return matching_words
 
