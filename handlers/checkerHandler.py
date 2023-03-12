@@ -5,6 +5,13 @@ from unidecode import unidecode
 common_symbols = ['`', '~', '!', '@', '#', '$', '%', '^', '&', '*', '(', ')', '-', '_', '=', '+', '[', '{', ']', '}', '\\', '|', ';', ':', "'", '"', ',', '<', '.', '>', '/', '?', " "]
 less_common_symbols = [chr(169), chr(174), chr(8482), chr(8364), chr(163), chr(165), chr(8486), chr(9827), chr(9829), chr(9830)]
 
+letter_changes = {
+    "@": "a", 
+    "!": "i",
+    "$": "s",
+    "0": "o"
+}
+
 
 def _removeAccents(string: Union[str, list[str]]) -> str: 
     """Remove accents from string to prevent bypasses.
@@ -64,6 +71,17 @@ def lowerCase(words: list[str]) -> list[str]:
 
     return new_word_list
 
+def letterSwitchChecker(text: str, words: list[str]) -> list[str]:
+    """Check for words were symbols have been put there instead of letters.
+
+    Args:
+        text (str): text to be checked.
+        words (list[str]): words to check the text for
+
+    Returns:
+        list[str]: returns a list of words that triggered the checker.
+    """
+
 
 def checker(text: str, remove_zero_width_spaces: Union[bool, None], remove_symbols: Union[bool, None], words: list[str]) -> list[str]:
     """Check for words that are in the words list.
@@ -99,4 +117,9 @@ def checker(text: str, remove_zero_width_spaces: Union[bool, None], remove_symbo
         if word in text:
             matching_words.append(word)
 
+    
+
     return matching_words
+
+
+# Re check the words but check if other symbols have been used instead of words.
