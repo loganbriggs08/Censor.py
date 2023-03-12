@@ -25,28 +25,28 @@ def _removeAccents(string: Union[str, list[str]]) -> str:
         return unidecode(string)
     
 
-# def removeSymbols(words: list[str]) -> list[str]:
-#     """Remove symbols from word list.
+def removeSymbols(words: list[str]) -> list[str]:
+    """Remove symbols from word list.
     
-#     Args:
-#         words (list[str]): list of words to remove symbols from.
+    Args:
+        words (list[str]): list of words to remove symbols from.
 
-#     Returns:
-#         list (str): returns list of words without the symbols.
-#     """
-#     new_words_arr: list[str] = []
+    Returns:
+        list (str): returns list of words without the symbols.
+    """
+    new_words_arr: list[str] = []
     
-#     for word in words:
-#         for letter in word:
-#             if letter in common_symbols or letter in less_common_symbols:
-#                 word: str = word.replace(letter, '').lower()
-#                 new_words_arr.append(word)
+    for word in words:
+        for letter in word:
+            if letter in common_symbols or letter in less_common_symbols:
+                word: str = word.replace(letter, '').lower()
+                new_words_arr.append(word)
 
-#         else: 
-#             if word not in new_words_arr:
-#                 new_words_arr.append(word)
+        else: 
+            if word not in new_words_arr:
+                new_words_arr.append(word)
     
-#     return new_words_arr
+    return new_words_arr
 
 def lowerCase(words: list[str]) -> list[str]: 
     """Make all words in words list lowercase.
@@ -65,7 +65,7 @@ def lowerCase(words: list[str]) -> list[str]:
     return new_word_list
 
 
-def checker(text: str, remove_zero_width_spaces: Union[bool, None], words: list[str]) -> list[str]:
+def checker(text: str, remove_zero_width_spaces: Union[bool, None], remove_symbols: Union[bool, None], words: list[str]) -> list[str]:
     """Check for words that are in the words list.
 
     Args:
@@ -79,7 +79,10 @@ def checker(text: str, remove_zero_width_spaces: Union[bool, None], words: list[
     matching_words: list[str] = []
 
     word_list: list[str] = _removeAccents(words)
-    # word_list: list[str] = removeSymbols(word_list)
+    word_list: list[str] = lowerCase(word_list)
+
+    if remove_symbols == True:
+        word_list: list[str] = removeSymbols(word_list)
 
     text: str = text.lower()
     text: str = _removeAccents(text)
