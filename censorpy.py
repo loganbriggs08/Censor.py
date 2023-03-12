@@ -2,15 +2,25 @@ from typing import Union
 from handlers.checkerHandler import checker
 
 class censor:
-    def __init__(self, check_ascii: Union[bool, None], remove_zero_width_spaces: Union[bool, None], words: list[str]):
-        self.check_ascii = check_ascii
+    def __init__(self, remove_zero_width_spaces: Union[bool, None], words: list[str]):
         self.remove_zero_width_spaces = remove_zero_width_spaces
         self.words_list = words
 
     def config(self) -> str:
-        return {"check_ascii": self.check_ascii, "remove_zero_width_spaces": self.remove_zero_width_spaces, "words": self.words_list}
+        """Get your configuration for censorpy.
+
+        Returns:
+            dict: returns dict with configuration.
+        """
+        return {"remove_zero_width_spaces": self.remove_zero_width_spaces, "words": self.words_list}
     
     def check(self, string: str) -> list[str]:
-        return checker(string, self.check_ascii, self.remove_zero_width_spaces, self.words_list)
+        """Check a string for words in your words list.
 
+        Args:
+            string (str): string that you would like to check.
 
+        Returns:
+            list (str): list of words that have triggered the checker.
+        """
+        return checker(string, self.remove_zero_width_spaces, self.words_list)
