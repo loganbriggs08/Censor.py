@@ -98,6 +98,10 @@ def letterSwitchChecker(text: str, words: list[str]) -> list[str]:
         else:
             changed_text += letter
 
+    for word in words:
+        if word in changed_text: 
+            new_word_list.append(word)
+
     return new_word_list
 
     
@@ -139,9 +143,9 @@ def checker(text: str, remove_zero_width_spaces: Union[bool, None], remove_symbo
         if word in text:
             matching_words.append(word)
 
-    result = letterSwitchChecker(original_text, remove_symbols, words)
-
+    result = letterSwitchChecker(original_text, words)
+    
+    for result in result:
+        matching_words.append(result)
+    
     return matching_words
-
-
-# Re check the words but check if other symbols have been used instead of words.
