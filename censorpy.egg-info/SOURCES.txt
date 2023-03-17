@@ -1,0 +1,11 @@
+setup.py
+censorpy/__init__.py
+censorpy/censorpy.py
+censorpy.egg-info/PKG-INFO
+censorpy.egg-info/SOURCES.txt
+censorpy.egg-info/dependency_links.txt
+censorpy.egg-info/requires.txt
+censorpy.egg-info/top_level.txt
+censorpy/handlers/__init__.py
+censorpy/handlers/censorHandler.py
+censorpy/handlers/checkerHandler.py
