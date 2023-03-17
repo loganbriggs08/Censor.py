@@ -3,7 +3,8 @@ from censorpy import censor
 
 wordList = ["fuck", "shit", "shat"]
 
-censor = censorpy.censor(words=wordList, remove_zero_width_spaces=True, remove_symbols=True)
+censor = censorpy.censor(words=wordList, remove_zero_width_spaces=True, remove_symbols=True, change_character="*")
 
-print(censor.check("f.u.c.k $hit sh@t"))
+# print(censor.check("f.u.c.k $hit sh@t"))
+print(censor.censor("$hit i stubbed my toe, f.u.c.k"))
 
